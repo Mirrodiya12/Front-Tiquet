@@ -1,0 +1,39 @@
+<div class="login-container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <div>
+      <label for="username">Usuario:</label>
+      <input
+        type="text"
+        id="username"
+        name="username"
+        required
+        [(ngModel)]="username"
+        #usernameInput="ngModel"
+      />
+      <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error">
+        Usuario es requerido.
+      </div>
+    </div>
+
+    <div>
+      <label for="password">Contraseña:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        [(ngModel)]="password"
+        #passwordInput="ngModel"
+      />
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error">
+        Contraseña es requerida.
+      </div>
+      <div class="register-link">
+        <p>¿No tienes una cuenta? <a routerLink="/register">Crea una</a></p>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+  </form>
+</div>
