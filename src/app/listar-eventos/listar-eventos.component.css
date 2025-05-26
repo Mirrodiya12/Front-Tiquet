@@ -1,0 +1,52 @@
+.listar-eventos-container {
+  max-width: 700px;
+  margin: 50px auto 70px auto;
+  padding: 25px 30px;
+  background-color: #f7f9fc;
+  border: 1px solid #d1d9e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  color: #4a5768;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+thead tr {
+  background-color: #7a8bbd;
+  color: white;
+}
+
+thead th {
+  padding: 12px 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+tbody tr {
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+tbody tr:hover {
+  background-color: #e9efff;
+}
+
+tbody td {
+  padding: 14px 15px;
+  vertical-align: middle;
+  color: #4a5768;
+}
