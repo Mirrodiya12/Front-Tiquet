@@ -1,0 +1,62 @@
+<div class="crear-evento-container">
+<h2>Crear Evento</h2>
+    <form (ngSubmit)="crearEvento()" #eventoForm="ngForm" class="crear-evento-container">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" type="text" name="nombre" [(ngModel)]="evento.nombre" placeholder="Nombre" required />
+    </div>
+
+    <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" [(ngModel)]="evento.descripcion" placeholder="Descripción" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="fechaInicio">Fecha Inicio</label>
+        <input id="fechaInicio" type="datetime-local" name="fechaInicio" [(ngModel)]="evento.fechaInicio" required />
+    </div>
+
+    <div class="form-group">
+        <label for="fechaFin">Fecha Fin</label>
+        <input id="fechaFin" type="datetime-local" name="fechaFin" [(ngModel)]="evento.fechaFin" required />
+    </div>
+
+    <div class="form-group">
+        <label for="tipoEvento">Tipo de Evento</label>
+        <input id="tipoEvento" type="text" name="tipoEvento" [(ngModel)]="evento.tipoEvento" placeholder="Tipo de Evento" required />
+    </div>
+
+    <div class="form-group">
+        <label for="stockGeneral">Stock General</label>
+        <input id="stockGeneral" type="number" name="stockGeneral" [(ngModel)]="evento.stockGeneral" placeholder="Stock General" required />
+    </div>
+
+    <div class="form-group">
+        <label for="organizador">Organizador</label>
+        <select id="organizador" name="organizador" [(ngModel)]="evento.organizador.idUsuario" required>
+        <option *ngFor="let user of usuarios" [value]="user.idUsuario">{{ user.nombre }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado" [(ngModel)]="evento.estado.idEstadoEvento" required>
+        <option *ngFor="let estado of estados" [value]="estado.idEstadoEvento">{{ estado.nombre }}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ubicacion">Ubicación</label>
+        <select id="ubicacion" name="ubicacion" [(ngModel)]="evento.ubicacion.idUbicacion" required>
+        <option *ngFor="let ubicacion of ubicaciones" [value]="ubicacion.idUbicacion">
+            {{ ubicacion.direccion }}, {{ ubicacion.ciudad }}
+        </option>
+        </select>
+    </div>
+
+    <button type="submit">Crear Evento</button>
+    </form>
+    <button class="boton-flotante" (click)="volverAListarEventos()" aria-label="Volver a Listar Eventos">
+    &#8592;
+    </button>
+</div>

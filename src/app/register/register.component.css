@@ -71,3 +71,28 @@ button:not(:disabled):hover {
   margin-top: 4px;
 }
 
+.boton-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #5867dd;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  border: none;
+}
+
+.boton-flotante:hover {
+  background-color: #7a8bbd;
+  transform: scale(1.1);
+}

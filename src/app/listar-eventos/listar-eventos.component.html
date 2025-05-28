@@ -11,13 +11,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let evento of eventos">
-        <td>{{ evento.nombre }}</td>
-        <td>{{ evento.descripcion }}</td>
-        <td>{{ evento.fechaInicio | date:'short' }}</td>
-        <td>{{ evento.fechaFin | date:'short' }}</td>
-        <td>{{ evento.tipoEvento }}</td>
-      </tr>
+      <ng-container *ngFor="let evento of eventos">
+        <!-- Fila principal -->
+        <tr (click)="toggleEvento(evento)" class="evento-row">
+          <td>{{ evento.nombre }}</td>
+          <td>{{ evento.descripcion }}</td>
+          <td>{{ evento.fechaInicio | date:'short' }}</td>
+          <td>{{ evento.fechaFin | date:'short' }}</td>
+          <td>{{ evento.tipoEvento }}</td>
+        </tr>
+
+        <!-- Fila de detalles expandida -->
+        <tr *ngIf="eventoExpandido === evento" class="detalles-row">
+          <td colspan="5">
+            <div class="detalles-panel">
+              <p><strong>Organizador:</strong> {{ evento.organizador?.nombre }} ({{ evento.organizador?.correo }})</p>
+              <p><strong>Ubicación:</strong> {{ evento.ubicacion?.direccion }}, {{ evento.ubicacion?.ciudad }}, {{ evento.ubicacion?.pais }}</p>
+              <p><strong>Estado:</strong> {{ evento.estado?.nombre }}</p>
+              <p><strong>Stock General:</strong> {{ evento.stockGeneral }}</p>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
+
+  <!-- Botón flotante para crear evento -->
+<button class="boton-flotante" (click)="irCrearEvento()" title="Crear evento">
+  <span>+</span>
+</button>
+
 </div>

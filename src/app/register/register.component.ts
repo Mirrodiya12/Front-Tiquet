@@ -76,4 +76,8 @@ export class RegisterComponent implements OnInit {
       alert('Por favor, completa todos los campos');
     }
   }
+
+  volverAListarEventos(): void {
+  this.router.navigate(['/login']);
+  }
 }
