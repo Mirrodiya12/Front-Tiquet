@@ -14,7 +14,6 @@ export class AuthService {
     return this.http.post(this.apiUrl, { correo, contrasena }).pipe(
       tap((user) => {
         this.usuario = user;
-        this.router.navigate(['/eventos']); // redirige al componente de eventos
       })
     );
   }
@@ -35,5 +34,4 @@ export class AuthService {
   registerUser(userData: any): Observable<any> {
     return this.http.post<any>('http://localhost:8080/api/usuario', userData);
   }
-
 }
