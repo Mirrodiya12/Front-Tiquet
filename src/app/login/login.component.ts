@@ -21,9 +21,11 @@ export class LoginComponent {
 
   onSubmit(): void {
     this.authService.login(this.username, this.password).subscribe({
-      next: (usuario) => {
+      next: (respuesta) => {
         this.error = '';
-        const rol = usuario.rol?.nombre?.toLowerCase(); // ✅ CORREGIDO
+        localStorage.setItem('token', respuesta.token);
+
+        const rol = respuesta.usuario?.rol?.nombre?.toLowerCase();
 
         if (rol === 'organizador') {
           this.router.navigate(['/eventos']);

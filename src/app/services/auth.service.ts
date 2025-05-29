@@ -5,7 +5,7 @@ import { Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/usuario/login';
+  private apiUrl = 'http://localhost:8080/api/auth/login';
   private usuario: any = null;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -28,10 +28,10 @@ export class AuthService {
   }
 
   getRoles(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/api/rol');
+    return this.http.get<any[]>('http://localhost:8080/api/auth/roles');
   }
 
   registerUser(userData: any): Observable<any> {
-    return this.http.post<any>('http://localhost:8080/api/usuario', userData);
+    return this.http.post<any>('http://localhost:8080/api/auth/usuario', userData);
   }
 }

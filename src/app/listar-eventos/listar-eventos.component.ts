@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Evento } from '../models/evento';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';  // Importa Router
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'app-listar-eventos',
@@ -14,22 +16,31 @@ import { Router } from '@angular/router';  // Importa Router
 export class ListarEventosComponent implements OnInit {
   eventos: Evento[] = [];
 
-  constructor(private http: HttpClient, private router: Router) {}  // Inyecta Router
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) {}  // Inyecta Router
 
   ngOnInit(): void {
     this.obtenerEventos();
   }
 
-  obtenerEventos(): void {
-    this.http.get<Evento[]>('http://localhost:8080/api/eventos').subscribe({
-      next: (data) => {
-        this.eventos = data;
-      },
-      error: (err) => {
-        console.error('Error al obtener eventos:', err);
-      }
-    });
+obtenerEventos(): void {
+  const usuario = this.authService.getUsuario();
+
+  let url = 'http://localhost:8080/api/eventos';
+
+  if (usuario?.rol?.nombre?.toLowerCase() === 'organizador') {
+    url += `?idUsuario=${usuario.idUsuario}`; // Ajusta según cómo el backend espera este parámetro
   }
+
+  this.http.get<Evento[]>(url).subscribe({
+    next: (data) => {
+      this.eventos = data;
+    },
+    error: (err) => {
+      console.error('Error al obtener eventos:', err);
+    }
+  });
+}
+
 
   eventoExpandido: any = null;
 

@@ -1,5 +1,39 @@
-<div class="pantalla-consumidor-container">
-  <h2>Bienvenido, consumidor</h2>
-  <p>Aquí podrás explorar eventos y comprar entradas.</p>
-</div>
+<div class="listar-eventos-container">
+  <h2>Lista de Eventos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Fecha Inicio</th>
+        <th>Fecha Fin</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let evento of eventos">
+        <!-- Fila principal -->
+        <tr (click)="toggleEvento(evento)" class="evento-row">
+          <td>{{ evento.nombre }}</td>
+          <td>{{ evento.descripcion }}</td>
+          <td>{{ evento.fechaInicio | date:'short' }}</td>
+          <td>{{ evento.fechaFin | date:'short' }}</td>
+          <td>{{ evento.tipoEvento }}</td>
+        </tr>
 
+        <!-- Fila de detalles expandida -->
+        <tr *ngIf="eventoExpandido === evento" class="detalles-row">
+          <td colspan="5">
+            <div class="detalles-panel">
+              <p><strong>Organizador:</strong> {{ evento.organizador?.nombre }} ({{ evento.organizador?.correo }})</p>
+              <p><strong>Ubicación:</strong> {{ evento.ubicacion?.direccion }}, {{ evento.ubicacion?.ciudad }}, {{ evento.ubicacion?.pais }}</p>
+              <p><strong>Estado:</strong> {{ evento.estado?.nombre }}</p>
+              <p><strong>Stock General:</strong> {{ evento.stockGeneral }}</p>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+</div>
