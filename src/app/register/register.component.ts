@@ -33,7 +33,6 @@ export class RegisterComponent implements OnInit {
   cargarRoles() {
     this.authService.getRoles().subscribe({
       next: (roles: any[]) => {
-        console.log('Roles cargados:', roles);
         this.roles = roles;
       },
       error: (error: any) => {
@@ -57,11 +56,8 @@ export class RegisterComponent implements OnInit {
         rol: { idRol: this.rol }
       };
 
-      console.log('Enviando datos al servidor:', userData);
-
       this.authService.registerUser(userData).subscribe({
         next: (response: any) => {
-          console.log('Respuesta del servidor:', response);
           this.isSubmitting = false;
           alert('Usuario registrado exitosamente');
           this.router.navigate(['/login']);

@@ -1,44 +1,75 @@
 <div class="listar-eventos-container">
-  <h2>Lista de Eventos</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Fecha Inicio</th>
-        <th>Fecha Fin</th>
-        <th>Tipo</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let evento of eventos">
-        <!-- Fila principal -->
-        <tr (click)="toggleEvento(evento)" class="evento-row">
-          <td>{{ evento.nombre }}</td>
-          <td>{{ evento.descripcion }}</td>
-          <td>{{ evento.fechaInicio | date:'short' }}</td>
-          <td>{{ evento.fechaFin | date:'short' }}</td>
-          <td>{{ evento.tipoEvento }}</td>
-        </tr>
+  <h2>Tus Eventos</h2>
 
-        <!-- Fila de detalles expandida -->
-        <tr *ngIf="eventoExpandido === evento" class="detalles-row">
-          <td colspan="5">
-            <div class="detalles-panel">
-              <p><strong>Organizador:</strong> {{ evento.organizador?.nombre }} ({{ evento.organizador?.correo }})</p>
-              <p><strong>Ubicación:</strong> {{ evento.ubicacion?.direccion }}, {{ evento.ubicacion?.ciudad }}, {{ evento.ubicacion?.pais }}</p>
-              <p><strong>Estado:</strong> {{ evento.estado?.nombre }}</p>
-              <p><strong>Stock General:</strong> {{ evento.stockGeneral }}</p>
-            </div>
-          </td>
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+
+  <div *ngIf="eventos.length === 0; else eventList">
+    <p>No tienes eventos creados.</p>
+  </div>
+
+  <ng-template #eventList>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Tipo</th>
+          <th>Estado</th>
+          <th>Acciones</th>
         </tr>
-      </ng-container>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let evento of eventos">
+          <tr (click)="toggleEvento(evento)" class="evento-row">
+            <td>{{ evento.nombre }}</td>
+            <td>{{ evento.descripcion }}</td>
+            <td>{{ evento.fechaInicio | date:'short' }}</td>
+            <td>{{ evento.fechaFin | date:'short' }}</td>
+            <td>{{ evento.tipoEvento }}</td>
+            <td>{{ evento.estado?.nombre }}</td>
+            <td>
+              <button *ngIf="eventoEditandoEstado?.idEvento !== evento.idEvento" (click)="iniciarEdicionEstado(evento)">
+                Cambiar Estado
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="eventoExpandido === evento" class="detalles-row">
+            <td colspan="7">
+              <div class="detalles-panel">
+                <p><strong>Organizador:</strong> {{ evento.organizador?.nombre }} ({{ evento.organizador?.correo }})</p>
+                <p><strong>Ubicación:</strong> {{ evento.ubicacion?.direccion }}, {{ evento.ubicacion?.ciudad }}, {{ evento.ubicacion?.pais }}</p>
+                <p><strong>Stock General:</strong> {{ evento.stockGeneral }}</p>
+
+                <div *ngIf="eventoEditandoEstado?.idEvento === evento.idEvento">
+                  <label for="estadoSelect">Cambiar Estado:</label>
+                  <select id="estadoSelect" [(ngModel)]="nuevoEstadoSeleccionado">
+                    <option *ngFor="let estado of estados" [value]="estado.idEstadoEvento">
+                      {{ estado.nombre }}
+                    </option>
+                  </select>
+                  <button (click)="guardarEstado()">Guardar</button>
+                  <button (click)="cancelarEdicionEstado()">Cancelar</button>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </ng-template>
 
   <!-- Botón flotante para crear evento -->
-<button class="boton-flotante" (click)="irCrearEvento()" title="Crear evento">
-  <span>+</span>
-</button>
+  <button class="boton-flotante" (click)="irCrearEvento()" title="Crear evento">
+    <span>+</span>
+  </button>
+
+  <!-- Botón de cerrar sesión -->
+  <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
 
 </div>

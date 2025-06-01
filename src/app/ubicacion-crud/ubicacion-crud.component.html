@@ -1,0 +1,91 @@
+<div class="ubicacion-crud-container">
+  <h2>Gestión de Ubicaciones</h2>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    {{ error }}
+  </div>
+
+  <!-- Formulario para crear nueva ubicación -->
+  <h3>Crear Nueva Ubicación</h3>
+  <form (ngSubmit)="crearUbicacion()" #createForm="ngForm">
+    <div class="form-group">
+      <label for="ciudad">Ciudad</label>
+      <input id="ciudad" type="text" name="ciudad" [(ngModel)]="nuevaUbicacion.ciudad" required />
+    </div>
+    <div class="form-group">
+      <label for="departamento">Departamento</label>
+      <input id="departamento" type="text" name="departamento" [(ngModel)]="nuevaUbicacion.departamento" required />
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input id="direccion" type="text" name="direccion" [(ngModel)]="nuevaUbicacion.direccion" required />
+    </div>
+    <div class="form-group">
+      <label for="pais">País</label>
+      <input id="pais" type="text" name="pais" [(ngModel)]="nuevaUbicacion.pais" required />
+    </div>
+    <button type="submit" [disabled]="!createForm.form.valid">Crear</button>
+  </form>
+
+  <hr>
+
+  <!-- Lista de ubicaciones existentes -->
+  <h3>Lista de Ubicaciones</h3>
+  <div *ngIf="ubicaciones.length === 0; else ubicacionList">
+    <p>No hay ubicaciones registradas.</p>
+  </div>
+
+  <ng-template #ubicacionList>
+    <table>
+      <thead>
+        <tr>
+          <th>Ciudad</th>
+          <th>Departamento</th>
+          <th>Dirección</th>
+          <th>País</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ubicacion of ubicaciones">
+          <td>{{ ubicacion.ciudad }}</td>
+          <td>{{ ubicacion.departamento }}</td>
+          <td>{{ ubicacion.direccion }}</td>
+          <td>{{ ubicacion.pais }}</td>
+          <td>
+            <button (click)="iniciarEdicion(ubicacion)">Editar</button>
+            <button (click)="eliminarUbicacion(ubicacion.idUbicacion)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+
+  <!-- Formulario de edición (aparece solo si se está editando) -->
+  <div *ngIf="ubicacionEditando" class="edit-form">
+    <h3>Editar Ubicación</h3>
+    <form (ngSubmit)="guardarEdicion()" #editForm="ngForm">
+      <div class="form-group">
+        <label for="editCiudad">Ciudad</label>
+        <input id="editCiudad" type="text" name="editCiudad" [(ngModel)]="ubicacionEditando.ciudad" required />
+      </div>
+      <div class="form-group">
+        <label for="editDepartamento">Departamento</label>
+        <input id="editDepartamento" type="text" name="editDepartamento" [(ngModel)]="ubicacionEditando.departamento" required />
+      </div>
+      <div class="form-group">
+        <label for="editDireccion">Dirección</label>
+        <input id="editDireccion" type="text" name="editDireccion" [(ngModel)]="ubicacionEditando.direccion" required />
+      </div>
+      <div class="form-group">
+        <label for="editPais">País</label>
+        <input id="editPais" type="text" name="editPais" [(ngModel)]="ubicacionEditando.pais" required />
+      </div>
+      <button type="submit" [disabled]="!editForm.form.valid">Guardar Cambios</button>
+      <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+    </form>
+  </div>
+
+  <!-- Botón de cerrar sesión -->
+  <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+</div> 

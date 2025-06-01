@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Evento } from '../models/evento';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';  // Importa Router
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { EventoService } from '../services/evento.service';
 
 @Component({
   selector: 'app-listar-eventos',
@@ -13,27 +15,58 @@ import { Router } from '@angular/router';  // Importa Router
 })
 export class PantallaConsumidorComponent implements OnInit {
   eventos: Evento[] = [];
+  error: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}  // Inyecta Router
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private http: HttpClient
+    // private eventoService: EventoService
+  ) {}
 
   ngOnInit(): void {
+    if (!this.authService.getToken()) {
+      this.router.navigate(['/login']);
+      return;
+    }
     this.obtenerEventos();
   }
 
   obtenerEventos(): void {
-    this.http.get<Evento[]>('http://localhost:8080/api/eventos').subscribe({
-      next: (data) => {
+    const token = this.authService.getToken();
+    if (!token) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`)
+      .set('Content-Type', 'application/json');
+
+    this.http.get<Evento[]>(`/api/eventos`, { headers }).subscribe({
+      next: (data: Evento[]) => {
         this.eventos = data;
+        this.error = null;
       },
-      error: (err) => {
-        console.error('Error al obtener eventos:', err);
+      error: (err: any) => {
+        if (err.status === 403 || err.status === 401) {
+          this.authService.logout();
+          this.router.navigate(['/login']);
+        } else {
+          this.error = 'Error al cargar los eventos. Por favor, intente nuevamente.';
+        }
       }
     });
   }
 
-  eventoExpandido: any = null;
+  eventoExpandido: Evento | null = null;
 
-  toggleEvento(evento: any) {
+  toggleEvento(evento: Evento): void {
     this.eventoExpandido = this.eventoExpandido === evento ? null : evento;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

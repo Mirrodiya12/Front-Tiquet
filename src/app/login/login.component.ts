@@ -2,29 +2,27 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username = '';
-  password = '';
+  correo = '';
+  contrasena = '';
   error = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(): void {
-    this.authService.login(this.username, this.password).subscribe({
+    this.authService.login(this.correo, this.contrasena).subscribe({
       next: (respuesta) => {
         this.error = '';
-        localStorage.setItem('token', respuesta.token);
-
         const rol = respuesta.usuario?.rol?.nombre?.toLowerCase();
 
         if (rol === 'organizador') {
@@ -35,8 +33,12 @@ export class LoginComponent {
           this.error = 'Rol no reconocido.';
         }
       },
-      error: () => {
-        this.error = 'Usuario o contraseña incorrectos';
+      error: (error) => {
+        if (error.error?.mensaje) {
+          this.error = error.error.mensaje;
+        } else {
+          this.error = 'Error al intentar iniciar sesión';
+        }
       }
     });
   }
