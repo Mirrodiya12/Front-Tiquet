@@ -19,7 +19,6 @@
             <td>{{ evento.fechaFin | date:'short' }}</td>
             <td>{{ evento.tipoEvento }}</td>
           </tr>
-
           <tr *ngIf="eventoExpandido === evento" class="bg-light">
             <td colspan="5">
               <div class="detalles-panel p-3">

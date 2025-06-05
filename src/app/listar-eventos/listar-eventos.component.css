@@ -100,18 +100,24 @@ tbody td {
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: bold;
-  cursor: pointer;            /* Aquí el cursor cambia a pointer */
+  cursor: pointer;
   text-decoration: none;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s ease, transform 0.3s ease;
-  z-index: 1000;              /* Asegura que esté encima de otros elementos */
+  z-index: 1000;
+  border: none;
 }
 
 .boton-flotante:hover {
   background-color: #7a8bbd;
   transform: scale(1.1);
+}
+
+.boton-flotante.back-button {
+  right: 80px;
+  font-size: 28px;
 }
 
 .btn-danger {

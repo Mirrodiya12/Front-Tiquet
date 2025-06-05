@@ -1,0 +1,50 @@
+<div class="editar-perfil-container">
+  <h2>Editar Perfil</h2>
+  
+  <form (ngSubmit)="onSubmit()" #editarPerfilForm="ngForm">
+    <div class="form-group">
+      <label for="nombre">Nombre:</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        [(ngModel)]="usuario.nombre"
+        required
+        #nombreInput="ngModel"
+      />
+      <div *ngIf="nombreInput.invalid && nombreInput.touched" class="error">
+        El nombre es requerido
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="correo">Correo:</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        [(ngModel)]="usuario.correo"
+        required
+        email
+        #correoInput="ngModel"
+      />
+      <div *ngIf="correoInput.invalid && correoInput.touched" class="error">
+        El correo es requerido y debe ser válido
+      </div>
+    </div>
+
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <div *ngIf="mensajeExito" class="success-message">
+      {{ mensajeExito }}
+    </div>
+
+    <button type="submit" [disabled]="editarPerfilForm.invalid">Actualizar Perfil</button>
+  </form>
+
+  <button class="boton-flotante back-button" (click)="volver()" aria-label="Volver">
+    &#8592;
+  </button>
+</div> 

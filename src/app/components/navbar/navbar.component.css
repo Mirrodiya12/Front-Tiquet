@@ -1,0 +1,105 @@
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #4a5768;
+}
+
+.navbar-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
+  margin-left: 2rem;
+}
+
+.navbar-start {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-end {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  color: #4a5768;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.navbar-item:hover {
+  background-color: #f7f9fc;
+  color: #6279b8;
+}
+
+.navbar-item.is-active {
+  background-color: #f7f9fc;
+  color: #6279b8;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.button.is-light {
+  background-color: #f7f9fc;
+  color: #4a5768;
+}
+
+.button.is-light:hover {
+  background-color: #e9ecef;
+}
+
+.button.is-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.button.is-danger:hover {
+  background-color: #c82333;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
