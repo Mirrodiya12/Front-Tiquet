@@ -8,8 +8,8 @@ import { LoginComponent } from './login/login.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
+    CommonModule,
+    RouterOutlet,
     HttpClientModule,
     LoginComponent
   ],
