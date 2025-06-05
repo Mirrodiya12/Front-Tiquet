@@ -61,7 +61,7 @@ export class ListarEventosComponent implements OnInit {
     if (!this.usuario) {
       return;
     }
-  
+
     this.eventoService.getEventosByOrganizador(this.usuario).subscribe({
       next: (data) => {
         this.eventos = data;
@@ -77,7 +77,7 @@ export class ListarEventosComponent implements OnInit {
       }
     });
   }
-  
+
 
   eventoExpandido: any = null;
 

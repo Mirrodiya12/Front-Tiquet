@@ -33,10 +33,10 @@ export class CategoriaService {
   }
 
   obtenerCategorias(): Observable<Categoria[]> {
-    console.log(`GET ${this.apiUrl}`);
+    // console.log(`GET ${this.apiUrl}`);
     return this.http.get<Categoria[]>(this.apiUrl, this.getHttpOptions()).pipe(
       map(response => {
-        console.log('Respuesta del servidor:', response);
+        // console.log('Respuesta del servidor:', response);
         // Asegurarse de que cada categoría tenga el idEvento correctamente asignado
         return response.map(cat => {
           // Si el idEvento está en el objeto evento pero no en la raíz, copiarlo
@@ -58,8 +58,8 @@ export class CategoriaService {
   }
 
   crearCategoria(categoria: Categoria): Observable<Categoria> {
-    console.log(`POST ${this.apiUrl}`, categoria);
-    
+    // console.log(`POST ${this.apiUrl}`, categoria);
+
     // Construir el objeto a enviar al backend explícitamente
     const categoriaParaEnviar: any = { // Usamos any temporalmente para flexibilidad con campos opcionales
         nombre: categoria.nombre,
@@ -86,8 +86,8 @@ export class CategoriaService {
   }
 
   actualizarCategoria(id: string, categoria: Categoria): Observable<Categoria> {
-     console.log(`PUT ${this.apiUrl}/${id}`, categoria);
-    
+     // console.log(`PUT ${this.apiUrl}/${id}`, categoria);
+
      // Construir el objeto a enviar al backend explícitamente
      const categoriaParaEnviar: any = { // Usamos any temporalmente
          idCategoria: categoria.idCategoria, // Incluir ID para actualizar
@@ -111,7 +111,7 @@ export class CategoriaService {
   }
 
   eliminarCategoria(id: string): Observable<void> {
-     console.log(`DELETE ${this.apiUrl}/${id}`);
+     // console.log(`DELETE ${this.apiUrl}/${id}`);
     return this.http.delete<void>(`${this.apiUrl}/${id}`, this.getHttpOptions()).pipe(
       catchError(error => {
         console.error(`Error en eliminarCategoria ${id}:`, error);
@@ -120,13 +120,8 @@ export class CategoriaService {
     );
   }
 
-  // Nuevo método para consultar categorías por ID de evento
-  // Este método espera una *única* categoría asociada al evento según la definición del backend.
-  // Si un evento puede tener múltiples categorías, este método debería devolver un array.
-  // Basado en el endpoint y la descripción del backend ("Optional<CategoriaDomain> consultarPorEvento"),
-  // asumo que cada evento tiene como máximo una categoría asociada de esta forma.
   consultarPorEvento(eventoId: string): Observable<CategoriaDomain | null> {
-    console.log(`POST ${this.apiUrl}/evento`, { idEvento: eventoId });
+    // console.log(`POST ${this.apiUrl}/evento`, { idEvento: eventoId });
      // El backend espera un RequestBody con un objeto EventoDomain que contenga solo el idEvento
     const body = { idEvento: eventoId };
     // Usamos post porque el backend espera un RequestBody
@@ -156,4 +151,4 @@ interface EventoDomain {
 // Ajustar si CategoriaDomain tiene propiedades distintas o adicionales que uses en el frontend
 interface CategoriaDomain extends Categoria {
   // Añadir otras propiedades si CategoriaDomain tiene más que Categoria
-} 
+}

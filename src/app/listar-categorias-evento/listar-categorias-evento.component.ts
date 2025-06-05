@@ -44,10 +44,10 @@ export class ListarCategoriasEventoComponent implements OnInit {
         this.loading = false;
       },
       error: (error) => {
-        console.error('Error al cargar categorías:', error);
+        // console.error('Error al cargar categorías:', error);
         this.error = 'Error al cargar las categorías';
         this.loading = false;
       }
     });
   }
-} 
+}

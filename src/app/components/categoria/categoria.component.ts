@@ -36,10 +36,10 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log('Parámetros recibidos:', params);
+      // console.log('Parámetros recibidos:', params);
       this.eventoId = params['eventoId'];
-      console.log('ID del evento:', this.eventoId);
-      
+      // console.log('ID del evento:', this.eventoId);
+
       if (this.eventoId) {
         this.categoria.idEvento = this.eventoId;
         // Asegurarse de que el objeto evento esté presente con el idEvento
@@ -56,15 +56,15 @@ export class CategoriaComponent implements OnInit {
     // Esto es necesario si la API no soporta filtrar directamente por eventoId
     this.categoriaService.obtenerCategorias().subscribe({
       next: (categorias) => {
-        console.log('Categorías recibidas:', categorias);
-        console.log('ID del evento para filtrar:', this.eventoId);
+        // console.log('Categorías recibidas:', categorias);
+        // console.log('ID del evento para filtrar:', this.eventoId);
         // Asegurarse de que la comparación sea correcta (string con string)
         // Añadir logs para depurar el filtro
         this.categorias = categorias.filter(cat => {
-          console.log(`Comparando cat.idEvento (${cat.idEvento}) con this.eventoId (${this.eventoId})`);
+          // console.log(`Comparando cat.idEvento (${cat.idEvento}) con this.eventoId (${this.eventoId})`);
           return cat.idEvento === this.eventoId;
         });
-        console.log('Categorías filtradas:', this.categorias);
+        // console.log('Categorías filtradas:', this.categorias);
 
         // Formatear fechas para el input datetime-local al cargar categorías existentes
         this.categorias.forEach(cat => {
@@ -76,7 +76,7 @@ export class CategoriaComponent implements OnInit {
 
       },
       error: (error) => {
-        console.error('Error al cargar categorías:', error);
+        // console.error('Error al cargar categorías:', error);
         this.error = 'Error al cargar las categorías';
       }
     });
@@ -95,10 +95,10 @@ export class CategoriaComponent implements OnInit {
     // Asegurarse de que el evento esté correctamente configurado
     this.categoria.evento = { idEvento: this.eventoId };
 
-    console.log('Creando categoría:', this.categoria);
+    // console.log('Creando categoría:', this.categoria);
     this.categoriaService.crearCategoria(this.categoria).subscribe({
       next: (response) => {
-        console.log('Respuesta del servidor:', response);
+        // console.log('Respuesta del servidor:', response);
         // Recargar las categorías después de crear una nueva
         this.cargarCategorias();
         // Resetear el formulario manteniendo el eventoId
@@ -116,7 +116,7 @@ export class CategoriaComponent implements OnInit {
         this.volverAListarEventos();
       },
       error: (error) => {
-        console.error('Error al crear categoría:', error);
+        // console.error('Error al crear categoría:', error);
         if (error.status === 403) {
           this.error = 'No tiene permisos para crear categorías';
         } else {

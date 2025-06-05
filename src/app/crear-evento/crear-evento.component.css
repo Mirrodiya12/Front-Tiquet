@@ -1,11 +1,15 @@
 .crear-evento-container {
-  background-color: #F5EBDD;
+  background-color: #fff;
   color: #2B1D1D;
   max-width: 600px;
   margin: 60px auto;
   padding: 30px;
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 0 12px rgba(60, 60, 60, 0.3);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
 h2 {
@@ -16,7 +20,7 @@ h2 {
 }
 
 h3 {
-  color: #8B1A1A;
+  color: #D4AF37;
   font-weight: bold;
   margin-top: 30px;
   margin-bottom: 16px;

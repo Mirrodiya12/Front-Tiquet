@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html { height: 100%; }
 
 /* Estilos globales */
 .form-control:focus {
@@ -23,10 +23,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .text-danger {
   color: #8B1A1A !important;
 /* Fuente base */
+}
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #F5EBDD; /* Color suave de fondo */
   color: #333;
   min-height: 100vh;

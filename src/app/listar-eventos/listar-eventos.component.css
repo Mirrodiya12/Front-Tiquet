@@ -1,7 +1,22 @@
 .listar-eventos-container {
-  background-color: #F5EBDD;
-  min-height: 100vh;
-  padding-bottom: 80px;
+  background-color: #fefefe;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cursor-pointer:hover {
+  background-color: #f0f8ff;
 }
 
 .boton-flotante {
@@ -18,4 +33,22 @@
   justify-content: center;
   align-items: center;
 }
+
+.detalles-panel {
+  background-color: light;
+  border-left: 4px solid #d4af37;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.detalles-texto {
+  padding: 16px;
+  font-size: 32px;
+  color: #d4af37;
+}
+
 

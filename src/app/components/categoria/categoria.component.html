@@ -1,12 +1,13 @@
-<div class="container mt-4">
-  <h2>Crear Nueva Categoría</h2>
+<div class="crear-categoria-container container mt-5 p-4 shadow-sm bg-white rounded">
+  <h2 class="text-center fw-bold mb-4">Crear Nueva Categoría</h2>
 
-  <div class="card mb-4">
+  <div class="card border-0">
     <div class="card-body">
-      <h3 class="card-title">Formulario de Categoría</h3>
-      <form (ngSubmit)="onSubmit()" #categoriaForm="ngForm">
+
+      <form (ngSubmit)="onSubmit()" #categoriaForm="ngForm" novalidate>
+        <!-- Nombre -->
         <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre</label>
+          <label for="nombre" class="form-label fw-semibold">Nombre</label>
           <input
             type="text"
             class="form-control"
@@ -15,13 +16,14 @@
             [(ngModel)]="categoria.nombre"
             required
             #nombreInput="ngModel">
-          <div class="text-danger" *ngIf="nombreInput.invalid && nombreInput.touched">
+          <div class="form-text text-danger" *ngIf="nombreInput.invalid && nombreInput.touched">
             El nombre es requerido
           </div>
         </div>
 
+        <!-- Precio -->
         <div class="mb-3">
-          <label for="precio" class="form-label">Precio</label>
+          <label for="precio" class="form-label fw-semibold">Precio</label>
           <input
             type="number"
             class="form-control"
@@ -31,13 +33,14 @@
             required
             min="0"
             #precioInput="ngModel">
-          <div class="text-danger" *ngIf="precioInput.invalid && precioInput.touched">
+          <div class="form-text text-danger" *ngIf="precioInput.invalid && precioInput.touched">
             El precio es requerido y debe ser mayor o igual a 0
           </div>
         </div>
 
+        <!-- Stock -->
         <div class="mb-3">
-          <label for="stock" class="form-label">Stock</label>
+          <label for="stock" class="form-label fw-semibold">Stock</label>
           <input
             type="number"
             class="form-control"
@@ -47,13 +50,14 @@
             required
             min="0"
             #stockInput="ngModel">
-          <div class="text-danger" *ngIf="stockInput.invalid && stockInput.touched">
+          <div class="form-text text-danger" *ngIf="stockInput.invalid && stockInput.touched">
             El stock es requerido y debe ser mayor o igual a 0
           </div>
         </div>
 
+        <!-- Fecha de Expiración -->
         <div class="mb-3">
-          <label for="fechaExpira" class="form-label">Fecha de Expiración</label>
+          <label for="fechaExpira" class="form-label fw-semibold">Fecha de Expiración</label>
           <input
             type="datetime-local"
             class="form-control"
@@ -62,26 +66,26 @@
             [(ngModel)]="categoria.fechaExpira"
             required
             #fechaInput="ngModel">
-          <div class="text-danger" *ngIf="fechaInput.invalid && fechaInput.touched">
+          <div class="form-text text-danger" *ngIf="fechaInput.invalid && fechaInput.touched">
             La fecha de expiración es requerida
           </div>
         </div>
 
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-primary" [disabled]="categoriaForm.invalid">
-            Crear Categoría
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="volverAListarEventos()">
-            Volver a Eventos
+        <!-- Botones -->
+        <div class="mt-4">
+          <button type="submit" [disabled]="categoriaForm.invalid">
+            <i class="bi bi-check-circle"></i> Crear Categoría
           </button>
         </div>
-        <div *ngIf="error" class="alert alert-danger mt-3">
+
+        <!-- Error -->
+        <div *ngIf="error" class="alert alert-danger mt-4 text-center">
           {{ error }}
         </div>
       </form>
+      <button class="boton-flotante back-button" (click)="volverAListarEventos()" aria-label="Volver">
+        <i class="bi bi-arrow-left"></i>
+      </button>
     </div>
   </div>
-
-  <!-- Sección de listado de categorías eliminada -->
-
-</div> 
+</div>

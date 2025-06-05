@@ -1,6 +1,4 @@
 <div class="container mt-4">
-  <h2>Categorías del Evento</h2>
-
   <div *ngIf="loading" class="alert alert-info">Cargando categorías...</div>
 
   <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
@@ -8,7 +6,7 @@
   <div *ngIf="!loading && !error && categorias.length > 0">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title">Categoría(s) Asociada(s)</h3>
+        <h2>Categorías del Evento</h2>
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -36,8 +34,7 @@
   <div *ngIf="!loading && !error && categorias.length === 0" class="alert alert-warning">
     No hay categorías asociadas a este evento.
   </div>
-
-  <button type="button" class="btn btn-secondary mt-3" [routerLink]="['/eventos']">
-    Volver a Eventos
+  <button class="btn btn-secondary boton-flotante" [routerLink]="['/eventos']" aria-label="Volver">
+    <i class="bi bi-arrow-left"></i>
   </button>
-</div> 
+</div>
