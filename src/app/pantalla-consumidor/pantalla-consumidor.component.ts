@@ -65,6 +65,13 @@ export class PantallaConsumidorComponent implements OnInit {
     this.eventoExpandido = this.eventoExpandido === evento ? null : evento;
   }
 
+  // Método para volver (puede navegar a una página anterior o una por defecto)
+  volver(): void {
+    // Para el consumidor, podrías redirigir a una página de inicio o al dashboard si existiera
+    console.log('Botón Volver presionado en Pantalla Consumidor. No hay navegación definida.');
+    // this.router.navigate(['/dashboard-consumidor']); // Ejemplo si tuvieras dashboard
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

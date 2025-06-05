@@ -118,9 +118,28 @@ export class ListarEventosComponent implements OnInit {
     });
   }
 
-  // Método para cerrar sesión
+  // Método para volver (puede navegar a una página anterior o una por defecto)
+  volver(): void {
+    // Por simplicidad, aquí navegamos a una página por defecto, podrías implementar historial si es necesario
+    const usuarioActual = this.authService.getUsuario();
+    const rol = usuarioActual?.rol?.nombre?.toLowerCase();
+
+    if (rol === 'organizador') {
+      // Si eres organizador, no hay 'atrás' per se desde listar eventos, podrías ir al dashboard si tuvieras uno
+      // Por ahora, no hacemos nada o podrías redirigir a otro lado si aplica.
+      console.log('Botón Volver presionado en Listar Eventos (Organizador). No hay navegación definida.');
+      // this.router.navigate(['/dashboard-organizador']); // Ejemplo si tuvieras dashboard
+    } else if (rol === 'consumidor') {
+       // Esto no debería ocurrir aquí si solo los organizadores listan eventos, pero por si acaso.
+      this.router.navigate(['/pantalla-consumidor']);
+    } else {
+        this.router.navigate(['/login']);
+    }
+  }
+
+  // Método para cerrar sesión (este ya no es necesario si usas la navbar)
   logout(): void {
-    this.authService.logout(); // Llama al método de logout del servicio
-    this.router.navigate(['/login']); // Redirige a la página de login
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

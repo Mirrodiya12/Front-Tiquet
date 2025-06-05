@@ -1,0 +1,57 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <span class="brand-text">Tiquet</span>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <!-- Enlaces para Organizador -->
+      <ng-container *ngIf="esOrganizador()">
+        <a class="navbar-item" routerLink="/eventos" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-list"></i>
+          </span>
+          <span>Listar Eventos</span>
+        </a>
+        <a class="navbar-item" routerLink="/crear-evento" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-plus"></i>
+          </span>
+          <span>Crear Evento</span>
+        </a>
+      </ng-container>
+      <!-- Enlaces para Consumidor -->
+      <ng-container *ngIf="esConsumidor()">
+        <a class="navbar-item" routerLink="/pantalla-consumidor" routerLinkActive="is-active">
+          <span class="icon">
+            <i class="fas fa-ticket-alt"></i>
+          </span>
+          <span>Eventos Disponibles</span>
+        </a>
+      </ng-container>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <button class="button is-light" routerLink="/editar-perfil">
+            <span class="icon">
+              <i class="fas fa-user"></i>
+            </span>
+            <span>Editar Perfil</span>
+          </button>
+          <button class="button is-light" routerLink="/cambiar-contrasena">
+            <span class="icon">
+              <i class="fas fa-lock"></i>
+            </span>
+            <span>Cambiar Contraseña</span>
+          </button>
+          <button class="button is-danger" (click)="logout()">
+            <span class="icon">
+              <i class="fas fa-sign-out-alt"></i>
+            </span>
+            <span>Cerrar Sesión</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav> 
