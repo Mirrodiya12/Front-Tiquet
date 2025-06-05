@@ -15,7 +15,7 @@
       />
       <div *ngIf="nuevaContrasenaInput.invalid && nuevaContrasenaInput.touched" class="error">
         <span *ngIf="nuevaContrasenaInput.errors?.['required']">La nueva contraseña es requerida.</span>
-        <span *ngIf="nuevaContrasenaInput.errors?.['minlength']">La contraseña debe tener al menos 8 caracteres.</span>
+        <span *ngIf="nuevaContrasenaInput.errors?.['minlength']">Debe tener al menos 8 caracteres.</span>
       </div>
     </div>
 
@@ -30,16 +30,16 @@
         minlength="8"
         #confirmarContrasenaInput="ngModel"
       />
-       <div *ngIf="confirmarContrasenaInput.invalid && confirmarContrasenaInput.touched" class="error">
+      <div *ngIf="confirmarContrasenaInput.invalid && confirmarContrasenaInput.touched" class="error">
         <span *ngIf="confirmarContrasenaInput.errors?.['required']">Confirmar contraseña es requerido.</span>
-        <span *ngIf="confirmarContrasenaInput.errors?.['minlength']">Confirmar contraseña debe tener al menos 8 caracteres.</span>
+        <span *ngIf="confirmarContrasenaInput.errors?.['minlength']">Debe tener al menos 8 caracteres.</span>
       </div>
-       <div *ngIf="nuevaContrasenaInput.valid && confirmarContrasenaInput.valid && nuevaContrasena !== confirmarContrasena" class="error">
+      <div *ngIf="nuevaContrasenaInput.valid && confirmarContrasenaInput.valid && nuevaContrasena !== confirmarContrasena" class="error">
         Las contraseñas no coinciden.
       </div>
     </div>
 
-     <div *ngIf="error" class="error-message">
+    <div *ngIf="error" class="error-message">
       {{ error }}
     </div>
 
@@ -51,6 +51,6 @@
   </form>
 
   <button class="boton-flotante back-button" (click)="volver()" aria-label="Volver">
-    &#8592;
+    <i class="bi bi-arrow-left"></i>
   </button>
-</div> 
+</div>
