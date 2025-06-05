@@ -1,6 +1,6 @@
 .bg-image-container {
   background-color: #5C1E1E;
-  background-image: url('../../assets/images/fondo-login.jpeg');
+  background-image: url('../../assets/fondo-login.jpeg');
   background-size: cover;
   background-position: center;
   height: 100vh;

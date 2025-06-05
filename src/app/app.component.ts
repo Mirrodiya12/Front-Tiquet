@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './login/login.component';
+// import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AuthService } from './services/auth.service';
 
@@ -13,7 +13,7 @@ import { AuthService } from './services/auth.service';
     CommonModule,
     RouterOutlet,
     HttpClientModule,
-    LoginComponent,
+    // LoginComponent,
     NavbarComponent
   ],
   templateUrl: './app.component.html',

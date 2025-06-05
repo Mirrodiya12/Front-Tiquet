@@ -68,15 +68,10 @@ export class CrearEventoComponent implements OnInit {
   private validarEvento(): boolean {
     if (!this.evento.nombre || !this.evento.descripcion || !this.evento.fechaInicio || 
         !this.evento.fechaFin || !this.evento.tipoEvento || 
-        !this.evento.stockGeneral || !this.evento.estado.idEstadoEvento ||
+        !this.evento.estado.idEstadoEvento ||
         !this.nuevaUbicacion.ciudad || !this.nuevaUbicacion.departamento || 
         !this.nuevaUbicacion.direccion || !this.nuevaUbicacion.pais) {
       this.error = 'Todos los campos del evento y de la ubicación son obligatorios.';
-      return false;
-    }
-
-    if (this.evento.stockGeneral <= 0) {
-      this.error = 'El stock general debe ser mayor a 0';
       return false;
     }
 
@@ -128,6 +123,7 @@ export class CrearEventoComponent implements OnInit {
 
         const eventoPayload = {
           ...this.evento,
+          stockGeneral: 0,
           organizador: { idUsuario: usuarioActual.idUsuario },
           estado: this.evento.estado 
         };
