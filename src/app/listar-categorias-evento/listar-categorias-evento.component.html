@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <h2>Categorías del Evento</h2>
+
+  <div *ngIf="loading" class="alert alert-info">Cargando categorías...</div>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <div *ngIf="!loading && !error && categorias.length > 0">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Categoría(s) Asociada(s)</h3>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Fecha de Expiración</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cat of categorias">
+                <td>{{ cat.nombre }}</td>
+                <td>{{ cat.precio | currency }}</td>
+                <td>{{ cat.stock }}</td>
+                <td>{{ cat.fechaExpira | date:'medium' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading && !error && categorias.length === 0" class="alert alert-warning">
+    No hay categorías asociadas a este evento.
+  </div>
+
+  <button type="button" class="btn btn-secondary mt-3" [routerLink]="['/eventos']">
+    Volver a Eventos
+  </button>
+</div> 

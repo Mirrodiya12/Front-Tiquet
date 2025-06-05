@@ -1,0 +1,19 @@
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.alert {
+  margin-top: 15px;
+}
+
+.btn-secondary {
+  margin-top: 10px;
+} 

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Estilos globales */
+.form-control:focus {
+  border-color: #8B1A1A;
+  box-shadow: 0 0 0 0.2rem rgba(139, 26, 26, 0.25);
+}
+
+.btn-primary {
+  background-color: #8B1A1A;
+  border-color: #8B1A1A;
+}
+
+.btn-primary:hover {
+  background-color: #A52A2A;
+  border-color: #A52A2A;
+}
+
+.text-danger {
+  color: #8B1A1A !important;
+}

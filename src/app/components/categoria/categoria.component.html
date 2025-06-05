@@ -1,0 +1,87 @@
+<div class="container mt-4">
+  <h2>Crear Nueva Categoría</h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="card-title">Formulario de Categoría</h3>
+      <form (ngSubmit)="onSubmit()" #categoriaForm="ngForm">
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nombre"
+            name="nombre"
+            [(ngModel)]="categoria.nombre"
+            required
+            #nombreInput="ngModel">
+          <div class="text-danger" *ngIf="nombreInput.invalid && nombreInput.touched">
+            El nombre es requerido
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="precio" class="form-label">Precio</label>
+          <input
+            type="number"
+            class="form-control"
+            id="precio"
+            name="precio"
+            [(ngModel)]="categoria.precio"
+            required
+            min="0"
+            #precioInput="ngModel">
+          <div class="text-danger" *ngIf="precioInput.invalid && precioInput.touched">
+            El precio es requerido y debe ser mayor o igual a 0
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="stock" class="form-label">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            name="stock"
+            [(ngModel)]="categoria.stock"
+            required
+            min="0"
+            #stockInput="ngModel">
+          <div class="text-danger" *ngIf="stockInput.invalid && stockInput.touched">
+            El stock es requerido y debe ser mayor o igual a 0
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="fechaExpira" class="form-label">Fecha de Expiración</label>
+          <input
+            type="datetime-local"
+            class="form-control"
+            id="fechaExpira"
+            name="fechaExpira"
+            [(ngModel)]="categoria.fechaExpira"
+            required
+            #fechaInput="ngModel">
+          <div class="text-danger" *ngIf="fechaInput.invalid && fechaInput.touched">
+            La fecha de expiración es requerida
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary" [disabled]="categoriaForm.invalid">
+            Crear Categoría
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="volverAListarEventos()">
+            Volver a Eventos
+          </button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger mt-3">
+          {{ error }}
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sección de listado de categorías eliminada -->
+
+</div> 

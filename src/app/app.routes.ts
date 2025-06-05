@@ -6,6 +6,9 @@ import { CrearEventoComponent } from './crear-evento/crear-evento.component';
 import { PantallaConsumidorComponent } from './pantalla-consumidor/pantalla-consumidor.component';
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
+import { UbicacionCrudComponent } from './ubicacion-crud/ubicacion-crud.component';
+import { CategoriaComponent } from './components/categoria/categoria.component';
+import { ListarCategoriasEventoComponent } from './listar-categorias-evento/listar-categorias-evento.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },  // ruta raíz redirige a login
@@ -16,6 +19,9 @@ export const routes: Routes = [
   { path: 'pantalla-consumidor', component: PantallaConsumidorComponent },
   { path: 'editar-perfil', component: EditarPerfilComponent },
   { path: 'cambiar-contrasena', component: CambiarContrasenaComponent },
+  { path: 'ubicaciones', component: UbicacionCrudComponent },
+  { path: 'categorias/:eventoId', component: CategoriaComponent },
+  { path: 'listar-categorias/:eventoId', component: ListarCategoriasEventoComponent },
   { path: '**', redirectTo: '/login' }  // ruta comodín al final
 ];
 
