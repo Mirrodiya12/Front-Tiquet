@@ -1,1 +1,115 @@
 /* You can add global styles to this file, and also import other style files */
+/* Fuente base */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #F5EBDD; /* Color suave de fondo */
+  color: #333;
+  min-height: 100vh;
+}
+
+/* Títulos */
+h1, h2, h3 {
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+/* Inputs */
+input, select, textarea {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Botones */
+button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+button.btn-primary {
+  background-color: #3c8dbc;
+  color: #fff;
+}
+
+button.btn-primary:hover {
+  background-color: #327399;
+}
+
+button.btn-secondary {
+  background-color: #aaa;
+  color: #fff;
+}
+
+button.btn-secondary:hover {
+  background-color: #888;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mensajes de error y éxito */
+.error-message,
+.text-danger {
+  color: #d9534f;
+  font-size: 0.9rem;
+}
+
+.success-message,
+.text-success {
+  color: #28a745;
+  font-size: 0.9rem;
+}
+
+thead {
+  background-color: #3c8dbc;
+  color: #fff;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid #dee2e6;
+  text-align: left;
+}
+
+/* Botón flotante */
+.boton-flotante {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  font-size: 24px;
+  background-color: #3c8dbc;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-flotante:hover {
+  background-color: #327399;
+}
