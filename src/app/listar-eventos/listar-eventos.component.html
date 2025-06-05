@@ -10,17 +10,39 @@
   </div>
 
   <ng-template #eventList>
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead class="table-light">
-          <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Fin</th>
-            <th>Tipo</th>
-            <th>Estado</th>
-            <th>Acciones</th>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Fecha Inicio</th>
+          <th>Fecha Fin</th>
+          <th>Tipo</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let evento of eventos">
+          <tr (click)="toggleEvento(evento)" class="evento-row">
+            <td>{{ evento.nombre }}</td>
+            <td>{{ evento.descripcion }}</td>
+            <td>{{ evento.fechaInicio | date:'short' }}</td>
+            <td>{{ evento.fechaFin | date:'short' }}</td>
+            <td>{{ evento.tipoEvento }}</td>
+            <td>{{ evento.estado?.nombre }}</td>
+            <td>
+              <button *ngIf="eventoEditandoEstado?.idEvento !== evento.idEvento" (click)="iniciarEdicionEstado(evento)">
+                Cambiar Estado
+              </button>
+              <button mat-raised-button color="primary" (click)="irACrearCategoria(evento); $event.stopPropagation()">
+                <mat-icon>add_circle</mat-icon>
+                Crear Categoría
+              </button>
+              <button type="button" class="btn btn-info btn-sm ms-2" [routerLink]="['/listar-categorias', evento.idEvento]">
+                <mat-icon>list</mat-icon> Listar Categorías
+              </button>
+            </td>
           </tr>
         </thead>
         <tbody>

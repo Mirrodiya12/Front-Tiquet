@@ -3,17 +3,33 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Evento } from '../models/evento';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';  // Importa Router
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { Usuario } from '../models/usuario';
 import { EventoService } from '../services/evento.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-listar-eventos',
   templateUrl: './listar-eventos.component.html',
   styleUrls: ['./listar-eventos.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+  ],
 })
 export class ListarEventosComponent implements OnInit {
   eventos: Evento[] = [];
@@ -141,5 +157,9 @@ export class ListarEventosComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  irACrearCategoria(evento: Evento): void {
+    this.router.navigate(['/categorias', evento.idEvento]);
   }
 }

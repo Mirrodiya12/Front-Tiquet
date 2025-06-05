@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UbicacionService } from '../services/ubicacion.service';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { UbicacionService } from '../services/ubicacion.service';
 
 @Component({
   selector: 'app-ubicacion-crud',
@@ -14,15 +14,19 @@ import { Router } from '@angular/router';
 })
 export class UbicacionCrudComponent implements OnInit {
   ubicaciones: any[] = [];
-  nuevaUbicacion: any = { ciudad: '', departamento: '', direccion: '', pais: '' };
-  ubicacionEditando: any | null = null;
+  nuevaUbicacion: any = {
+    direccion: '',
+    ciudad: '',
+    pais: ''
+  };
+  ubicacionEditando: any = null;
   error: string | null = null;
 
   constructor(
     private ubicacionService: UbicacionService,
-    private authService: AuthService,
-    private router: Router
-  ) { }
+    public router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     if (!this.authService.getToken()) {
@@ -43,63 +47,62 @@ export class UbicacionCrudComponent implements OnInit {
 
   crearUbicacion(): void {
     if (!this.validarUbicacion(this.nuevaUbicacion)) {
-      this.error = 'Por favor, completa todos los campos para crear una ubicación.';
       return;
     }
 
     this.ubicacionService.createUbicacion(this.nuevaUbicacion).subscribe({
-      next: (ubicacionCreada) => {
-        this.ubicaciones.push(ubicacionCreada);
-        this.nuevaUbicacion = { ciudad: '', departamento: '', direccion: '', pais: '' };
-        this.error = null;
+      next: () => {
+        this.cargarUbicaciones();
+        this.nuevaUbicacion = { direccion: '', ciudad: '', pais: '' };
       },
       error: (err) => this.manejarError(err)
     });
   }
 
-  iniciarEdicion(ubicacion: any): void {
-    this.ubicacionEditando = { ...ubicacion };
-  }
-
-  guardarEdicion(): void {
+  actualizarUbicacion(): void {
     if (!this.ubicacionEditando || !this.validarUbicacion(this.ubicacionEditando)) {
-      this.error = 'Por favor, completa todos los campos para actualizar la ubicación.';
       return;
     }
 
     this.ubicacionService.updateUbicacion(this.ubicacionEditando.idUbicacion, this.ubicacionEditando).subscribe({
-      next: (ubicacionActualizada) => {
-        const index = this.ubicaciones.findIndex(u => u.idUbicacion === ubicacionActualizada.idUbicacion);
-        if (index !== -1) {
-          this.ubicaciones[index] = ubicacionActualizada;
-        }
-        this.cancelarEdicion();
-        this.error = null;
+      next: () => {
+        this.cargarUbicaciones();
+        this.ubicacionEditando = null;
       },
       error: (err) => this.manejarError(err)
     });
   }
 
-  cancelarEdicion(): void {
-    this.ubicacionEditando = null;
-    this.error = null;
-  }
-
   eliminarUbicacion(id: string): void {
-    if (confirm('¿Estás seguro de que quieres eliminar esta ubicación?\')) {
+    if (confirm('¿Estás seguro de que quieres eliminar esta ubicación?')) {
       this.ubicacionService.deleteUbicacion(id).subscribe({
         next: () => {
-          this.ubicaciones = this.ubicaciones.filter(u => u.idUbicacion !== id);
-          this.cancelarEdicion();
-          this.error = null;
+          this.cargarUbicaciones();
         },
         error: (err) => this.manejarError(err)
       });
     }
   }
 
+  iniciarEdicion(ubicacion: any): void {
+    this.ubicacionEditando = { ...ubicacion };
+  }
+
+  cancelarEdicion(): void {
+    this.ubicacionEditando = null;
+  }
+
+  volverAEventos(): void {
+    this.router.navigate(['/eventos']);
+  }
+
   private validarUbicacion(ubicacion: any): boolean {
-    return ubicacion.ciudad && ubicacion.departamento && ubicacion.direccion && ubicacion.pais;
+    if (!ubicacion.direccion || !ubicacion.ciudad || !ubicacion.pais) {
+      this.error = 'Todos los campos son requeridos';
+      return false;
+    }
+    this.error = null;
+    return true;
   }
 
   private manejarError(error: any): void {

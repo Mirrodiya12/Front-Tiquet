@@ -27,24 +27,32 @@ export class AuthInterceptor implements HttpInterceptor {
 
     const token = this.authService.getToken();
     if (!token) {
+      this.authService.logout();
       this.router.navigate(['/login']);
       return throwError(() => new Error('No hay token de autenticación'));
     }
 
     // Clonar la petición y agregar el header de autorización
     const authReq = req.clone({
-      headers: req.headers
-        .set('Authorization', `Bearer ${token}`)
-        .set('Content-Type', 'application/json')
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      })
     });
 
     return next.handle(authReq).pipe(
-      tap(response => {
-      }),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 403 || error.status === 401) {
+        if (error.status === 403) {
+          console.error('Error de permisos:', error.error);
           this.authService.logout();
           this.router.navigate(['/login']);
+          return throwError(() => new Error('No tiene permisos para realizar esta acción'));
+        }
+        if (error.status === 401) {
+          this.authService.logout();
+          this.router.navigate(['/login']);
+          return throwError(() => new Error('Sesión expirada'));
         }
         return throwError(() => error);
       })
