@@ -1,42 +1,52 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-    <div>
-      <label for="correo">Correo:</label>
-      <input
-        type="email"
-        id="correo"
-        name="correo"
-        required
-        email
-        [(ngModel)]="correo"
-        #correoInput="ngModel"
-      />
-      <div *ngIf="correoInput.invalid && correoInput.touched" class="error">
-        Correo es requerido y debe ser válido.
-      </div>
-    </div>
+<div class="bg-image-container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="overlay"></div>
 
-    <div>
-      <label for="contrasena">Contraseña:</label>
-      <input
-        type="password"
-        id="contrasena"
-        name="contrasena"
-        required
-        [(ngModel)]="contrasena"
-        #contrasenaInput="ngModel"
-      />
-      <div *ngIf="contrasenaInput.invalid && contrasenaInput.touched" class="error">
-        Contraseña es requerida.
-      </div>
-      <div class="register-link">
-        <p>¿No tienes una cuenta? <a routerLink="/register">Crea una</a></p>
-      </div>
-    </div>
+  <div class="login-card card shadow p-4 position-relative">
+    <h2 class="text-center text-secondary mb-2">Login</h2>
 
-    <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <div class="mb-3">
+        <label for="correo" class="form-label">Correo:</label>
+        <input
+          type="email"
+          id="correo"
+          name="correo"
+          required
+          email
+          [(ngModel)]="correo"
+          #correoInput="ngModel"
+          class="form-control"
+        />
+        <div *ngIf="correoInput.invalid && correoInput.touched" class="text-danger small mt-1">
+          Correo es requerido y debe ser válido.
+        </div>
+      </div>
 
-    <div *ngIf="error" class="error-message">{{ error }}</div>
-  </form>
+      <div class="mb-3">
+        <label for="contrasena" class="form-label">Contraseña:</label>
+        <input
+          type="password"
+          id="contrasena"
+          name="contrasena"
+          required
+          [(ngModel)]="contrasena"
+          #contrasenaInput="ngModel"
+          class="form-control"
+        />
+        <div *ngIf="contrasenaInput.invalid && contrasenaInput.touched" class="text-danger small mt-1">
+          Contraseña es requerida.
+        </div>
+      </div>
+
+      <div class="mb-3 text-end">
+        <small> <a routerLink="/register" class="link-dark text-decoration-underline">¿No tienes una cuenta?</a></small>
+      </div>
+
+      <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary w-100">
+        Ingresar
+      </button>
+
+      <div *ngIf="error" class="alert alert-danger mt-3 py-2">{{ error }}</div>
+    </form>
+  </div>
 </div>

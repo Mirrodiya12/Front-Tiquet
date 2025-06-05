@@ -10,8 +10,8 @@ import { AuthService } from './services/auth.service';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet, 
+    CommonModule,
+    RouterOutlet,
     HttpClientModule,
     LoginComponent,
     NavbarComponent
